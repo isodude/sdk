@@ -259,7 +259,7 @@ func (r *Client) AddActualOrgUser(ctx context.Context, userRole UserRole) (Statu
 	if raw, _, err = r.post(ctx, "api/org/users", nil, raw); err != nil {
 		return StatusMessage{}, err
 	}
-    fmt.Printf("debug: %s\n", string(raw))
+    fmt.Printf("debug:wee %s\n", string(raw))
 	if err = json.Unmarshal(raw, &resp); err != nil {
 		return StatusMessage{}, err
 	}
