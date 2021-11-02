@@ -42,7 +42,7 @@ func (r *Client) CreateOrg(ctx context.Context, org Org) (StatusMessage, error) 
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -157,7 +157,7 @@ func (r *Client) UpdateActualOrg(ctx context.Context, org Org) (StatusMessage, e
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -177,7 +177,7 @@ func (r *Client) UpdateOrg(ctx context.Context, org Org, oid uint) (StatusMessag
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -194,7 +194,7 @@ func (r *Client) DeleteOrg(ctx context.Context, oid uint) (StatusMessage, error)
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -259,9 +259,8 @@ func (r *Client) AddActualOrgUser(ctx context.Context, userRole UserRole) (Statu
 	if raw, _, err = r.post(ctx, "api/org/users", nil, raw); err != nil {
 		return StatusMessage{}, err
 	}
-    fmt.Printf("debug:wee %s\n", string(raw))
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -281,7 +280,7 @@ func (r *Client) UpdateActualOrgUser(ctx context.Context, user UserRole, uid uin
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -367,7 +366,7 @@ func (r *Client) UpdateActualOrgPreferences(ctx context.Context, prefs Preferenc
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -411,7 +410,7 @@ func (r *Client) UpdateActualOrgAddress(ctx context.Context, address Address) (S
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
@@ -431,7 +430,7 @@ func (r *Client) UpdateOrgAddress(ctx context.Context, address Address, oid uint
 		return StatusMessage{}, err
 	}
 	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
+        return StatusMessage{}, fmt.Errorf("raw message %s with err: %v", string(raw), err)
 	}
 	return resp, nil
 }
