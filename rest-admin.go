@@ -21,10 +21,7 @@ func (r *Client) CreateUser(ctx context.Context, user User) (StatusMessage, erro
 	if raw, _, err = r.post(ctx, "api/admin/users", nil, raw); err != nil {
 		return StatusMessage{}, err
 	}
-	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
-	}
-	return resp, nil
+	return resp, json.Unmarshal(raw, &resp)
 }
 
 // DeleteUser deletes a global user
@@ -60,8 +57,7 @@ func (r *Client) UpdateUserPermissions(ctx context.Context, permissions UserPerm
 	if raw, _, err = r.put(ctx, fmt.Sprintf("api/admin/users/%d/permissions", uid), nil, raw); err != nil {
 		return StatusMessage{}, err
 	}
-	err = json.Unmarshal(raw, &reply)
-	return reply, err
+	return reply, json.Unmarshal(raw, &reply)
 }
 
 // SwitchUserContext switches user context to the given organization.
@@ -77,8 +73,5 @@ func (r *Client) SwitchUserContext(ctx context.Context, uid uint, oid uint) (Sta
 	if raw, _, err = r.post(ctx, fmt.Sprintf("/api/users/%d/using/%d", uid, oid), nil, raw); err != nil {
 		return StatusMessage{}, err
 	}
-	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
-	}
-	return resp, nil
+	return resp, json.Unmarshal(raw, &resp)
 }

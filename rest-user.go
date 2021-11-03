@@ -157,8 +157,5 @@ func (r *Client) SwitchActualUserContext(ctx context.Context, oid uint) (StatusM
 	if raw, _, err = r.post(ctx, fmt.Sprintf("/api/user/using/%d", oid), nil, raw); err != nil {
 		return StatusMessage{}, err
 	}
-	if err = json.Unmarshal(raw, &resp); err != nil {
-		return StatusMessage{}, err
-	}
-	return resp, nil
+	return resp, json.Unmarshal(raw, &resp)
 }
